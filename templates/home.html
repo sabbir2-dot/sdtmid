@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="d-flex flex-wrap mt-3">
+    <div class="col-6 mt-auto mb-auto">
+        <p style="display: flex; align-items: center;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+    </div>
+    <div class="col-6">
+        <img src="{% static 'car1.jpg' %}" alt="" srcset="" style="max-width: 100%;">
+    </div>
+</div>
+
+<div class="d-flex flex-wrap justify-content-around mt-5">
+    {% for b in brand %}
+    <a href="?brand={{ b.name }}" class="btn btn-primary">{{ b.name }}</a>
+    {% endfor %}
+
+</div>
+
+
+<div class="row row-cols-3 row-cols-md-3 mt-5">
+    {% for car in data %}
+    <div class="col">
+      <div class="card">
+        <img src={{car.image.url}} class="card-img-top w-100">
+        <div class="card-body">
+            <h5 class="card-title">{{car.name}}</h5>
+            <p class="card-text">{{car.description | truncatewords:15}}.</p>
+            <p class="card-text">{{car.price}}.</p>
+            <p class="card-text">{{car.brand}}.</p>
+            <p class="card-text"><small class="text-body-secondary">{{car.quantity}}</small></p>
+            <a href="{% url 'detail_car' car.id %}" class="text-decoration-none text-dark btn btn-danger">Details</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock content %}

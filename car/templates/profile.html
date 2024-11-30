@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Your Purchased Cars</h1>
+
+<div class="row">
+    {% for purchase in purchases %}
+    <div class="col-md-4">
+        <div class="card">
+            <img src="{{ purchase.car.image.url }}" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">{{ purchase.car.name }}</h5>
+                <p class="card-text">{{ purchase.car.description }}</p>
+                <p class="card-text">Price: {{ purchase.car.price }}</p>
+                <p class="card-text">Purchased on: {{ purchase.purchase_date }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <a href="{% url 'edit_profile' %}" class="btn btn-light">Update Profile</a>
+</div>
+
+{% endblock content %}
